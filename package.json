@@ -12,6 +12,9 @@
     "lint": "yarn tsc && yarn lint:js && yarn lint:unused && yarn lint:audit"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "class-variance-authority": "^0.7.1",
+    "flag-icons": "^7.5.0",
     "next": "15.5.2",
     "react": "19.1.1",
     "react-dom": "19.1.1"
