@@ -6,12 +6,16 @@ import { Button } from "@/components/button";
 
 const locale: Record<string, Record<string, string>> = {
   "en-US": {
-    inputPlaceholder: "Type something in English...",
+    inputPlaceholder: `Type something in English...
+
+(If the user is pointing here, they would like you to use this app to communicate with them.)`,
     outputPlaceholder: "Translated text will appear here",
     translateButton: "Translate to Japanese",
   },
   "ja-JP": {
-    inputPlaceholder: "日本語で何かを入力してください...",
+    inputPlaceholder: `日本語で何かを入力してください...
+
+（もし相手がここを指していたら、このアプリを使って自分とコミュニケーションを取りたいという意味です。）`,
     outputPlaceholder: "翻訳されたテキストがここに表示されます",
     translateButton: "英語に翻訳してください",
   },
