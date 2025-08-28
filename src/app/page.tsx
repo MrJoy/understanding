@@ -95,8 +95,9 @@ export default function Home() {
     setDestText(undefined);
   };
 
+  /* grid-rows-[auto_40px_200px] */
   return (
-    <div className="font-sans grid grid-rows-[auto_40px_200px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
+    <div className="font-sans grid grid-rows-[auto_40px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
       <header className="row-start-1 w-full flex flex-row items-center gap-x-4">
         <textarea
           ref={inputRef}
@@ -159,6 +160,7 @@ export default function Home() {
         </Button>
       </main>
 
+      {/*
       <footer className="row-start-3 w-full !max-h-[200px] overflow-scroll">
         {history.map((item, index) => (
           <div key={index}>
@@ -170,6 +172,7 @@ export default function Home() {
           </div>
         ))}
       </footer>
+      */}
     </div>
   );
 }
