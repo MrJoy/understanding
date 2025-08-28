@@ -1,0 +1,12 @@
+{
+  "ignoreUnresolved": [],
+  "ignoreUnused": [
+    "next",
+    "react",
+    "react-dom"
+  ],
+  "ignoreUnimported": [
+    "src/app/layout.tsx",
+    "src/app/page.tsx"
+  ]
+}
