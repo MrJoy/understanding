@@ -35,6 +35,7 @@ export default function Home() {
     setSourceLanguage((prev) => (prev === "en-US" ? "ja-JP" : "en-US"));
     setSourceText("");
     setDestText(undefined);
+    inputRef.current?.focus();
   }
 
   const controlSize = "text-md";
@@ -81,7 +82,6 @@ export default function Home() {
       setHistory((prev) => [[sourceText, translatedText], ...prev]);
       setSourceText("");
       setDestText(translatedText);
-      inputRef.current?.focus();
     } catch (err) {
       console.error("Translation error:", err);
       setError(err instanceof Error ? `Error: ${err.message}` : "Translation failed. Please try again.");
