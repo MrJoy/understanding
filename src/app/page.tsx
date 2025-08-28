@@ -36,7 +36,7 @@ export default function Home() {
     setDestText(undefined);
   }
 
-  const controlSize = "text-lg";
+  const controlSize = "text-md";
 
   const Us = <span className={controlSize}>🇺🇸</span>;
   const Jp = <span className={controlSize}>🇯🇵</span>;
@@ -127,7 +127,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="row-start-2 w-full flex gap-4 justify-items-stretch">
+      <main className="row-start-2 w-full flex md:gap-4 gap-2 justify-items-stretch">
         <Button className="flex-4 basis-4 text-nowrap px-4" onClick={toggleLanguage}>
           {sourceLanguage === "en-US" ? Us : Jp}
           <span className={`px-4 ${controlSize}`}>
