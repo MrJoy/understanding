@@ -26,6 +26,7 @@ export default function Home() {
   const [sourceLanguage, setSourceLanguage] = React.useState("en-US");
   const [history, setHistory] = React.useState<string[][]>([]);
   const [sourceText, setSourceText] = React.useState("");
+  // const [destText, setDestText] = React.useState("Tailwind プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。");
   const [destText, setDestText] = React.useState(undefined);
   const [isTranslating, setIsTranslating] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -53,6 +54,7 @@ export default function Home() {
       let translatedText;
       if (process.env.NEXT_PUBLIC_SKIP_TRANSLATION) {
         translatedText = "[Translation API is currently disabled]";
+        // translatedText = "Tailwind プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。";
       } else {
         const targetLanguage = sourceLanguage === "en-US" ? "Japanese" : "English";
 
