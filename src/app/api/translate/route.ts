@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const prompt = `Translate the following text to ${targetLanguage}. Only provide the translation without any explanation or additional text:\n\n${text}`;
+    const prompt = `Translate the following text to ${targetLanguage}.  The text might consist of a single word, phrase, or number.  Only provide the translation without any explanation or additional text:\n\n${text}`;
 
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt }],
