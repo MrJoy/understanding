@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/forms";
-@import "flag-icons/css/flag-icons.min.css";
 
 :root {
   --background: #ffffff;

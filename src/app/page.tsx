@@ -34,8 +34,8 @@ export default function Home() {
     setSourceLanguage((prev) => (prev === "en-US" ? "ja-JP" : "en-US"));
   }
 
-  const Us = <span className="flex-1 fi fi-us"></span>;
-  const Jp = <span className="flex-1 fi fi-jp"></span>;
+  const Us = <span className="flex-1 text-2xl">🇺🇸</span>;
+  const Jp = <span className="flex-1 text-2xl">🇯🇵</span>;
 
   const placeholderMessage = locale[sourceLanguage].inputPlaceholder;
 
@@ -127,7 +127,7 @@ export default function Home() {
       <main className="row-start-2 w-full flex gap-4 justify-items-stretch">
         <Button className="flex-4 basis-4 text-nowrap px-4" onClick={toggleLanguage}>
           {sourceLanguage === "en-US" ? Us : Jp}
-          <span className="px-4">
+          <span className="px-4 text-2xl">
             →
           </span>
           {sourceLanguage === "en-US" ? Jp : Us}
