@@ -1,12 +1,23 @@
 {
+  "entry": [
+    "src/app/page.tsx",
+    "src/app/layout.tsx",
+    "src/app/api/**/route.{js,ts}*"
+  ],
   "ignoreUnresolved": [],
   "ignoreUnused": [
-    "next",
-    "react",
-    "react-dom"
+    "@tailwindcss/forms",
+    "flag-icons"
   ],
-  "ignoreUnimported": [
-    "src/app/layout.tsx",
-    "src/app/page.tsx"
-  ]
+  "ignoreUnimported": [],
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/*.tests.{js,jsx,ts,tsx}",
+    "**/*.test.{js,jsx,ts,tsx}",
+    "**/*.spec.{js,jsx,ts,tsx}",
+    "**/tests/**",
+    "**/__tests__/**",
+    "**/*.d.ts"
+  ],
+  "respectGitignore": true
 }
