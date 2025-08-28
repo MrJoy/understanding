@@ -22,6 +22,7 @@ const locale: Record<string, Record<string, string>> = {
 }
 
 export default function Home() {
+  const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const [sourceLanguage, setSourceLanguage] = React.useState("en-US");
   const [history, setHistory] = React.useState<string[][]>([]);
   const [sourceText, setSourceText] = React.useState("");
@@ -75,6 +76,7 @@ export default function Home() {
       toggleLanguage();
       setSourceText("");
       setDestText(translatedText);
+      inputRef.current?.focus();
     } catch (err) {
       console.error("Translation error:", err);
       setError(err instanceof Error ? `Error: ${err.message}` : "Translation failed. Please try again.");
@@ -92,6 +94,7 @@ export default function Home() {
     <div className="font-sans grid grid-rows-[auto_40px_200px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
       <header className="row-start-1 w-full flex flex-row items-center gap-x-4">
         <textarea
+          ref={inputRef}
           value={sourceText}
           onChange={(e) => setSourceText(e.target.value)}
           placeholder={placeholderMessage}
