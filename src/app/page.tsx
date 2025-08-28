@@ -44,26 +44,32 @@ export default function Home() {
     setError(null);
 
     try {
-      const targetLanguage = sourceLanguage === "en-US" ? "Japanese" : "English";
+      let translatedText;
+      if (process.env.NEXT_PUBLIC_SKIP_TRANSLATION) {
+        translatedText = "[Translation API is currently disabled]";
+      } else {
+        const targetLanguage = sourceLanguage === "en-US" ? "Japanese" : "English";
 
-      const response = await fetch("/api/translate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          text: sourceText,
-          targetLanguage,
-        }),
-      });
+        const response = await fetch("/api/translate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            text: sourceText,
+            targetLanguage,
+          }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || "Translation failed");
+        if (!response.ok) {
+          throw new Error(data.error || "Translation failed");
+        }
+
+        translatedText = data.translation;
       }
 
-      const translatedText = data.translation;
       setHistory((prev) => [[sourceText, translatedText], ...prev]);
       toggleLanguage();
       setSourceText("");
