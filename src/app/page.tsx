@@ -60,6 +60,8 @@ export default function Home() {
 
       const translatedText = completion.choices[0]?.message?.content?.trim() || "Translation failed";
       setHistory((prev) => [[sourceText, translatedText], ...prev]);
+      toggleLanguage();
+      setSourceText("");
     } catch (err) {
       console.error("Translation error:", err);
       setError(err instanceof Error ? err.message : "Translation failed. Please check your API key.");
