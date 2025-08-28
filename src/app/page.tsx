@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import OpenAI from "openai";
 
 import { Button } from "@/components/button";
 
@@ -17,13 +16,6 @@ const locale: Record<string, Record<string, string>> = {
     translateButton: "英語に翻訳してください",
   },
 }
-
-// Initialize OpenAI client - API key will be exposed in production
-// For prototype purposes only - do not use in production
-const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY || "",
-  dangerouslyAllowBrowser: true // Required for client-side usage
-});
 
 export default function Home() {
   const [sourceLanguage, setSourceLanguage] = React.useState("en-US");
@@ -49,22 +41,31 @@ export default function Home() {
 
     try {
       const targetLanguage = sourceLanguage === "en-US" ? "Japanese" : "English";
-      const prompt = `Translate the following text to ${targetLanguage}. Only provide the translation without any explanation or additional text:\n\n${sourceText}`;
 
-      const completion = await openai.chat.completions.create({
-        messages: [{ role: "user", content: prompt }],
-        model: "gpt-3.5-turbo",
-        temperature: 0.3,
-        max_tokens: 1000,
+      const response = await fetch("/api/translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: sourceText,
+          targetLanguage,
+        }),
       });
 
-      const translatedText = completion.choices[0]?.message?.content?.trim() || "Translation failed";
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Translation failed");
+      }
+
+      const translatedText = data.translation;
       setHistory((prev) => [[sourceText, translatedText], ...prev]);
       toggleLanguage();
       setSourceText("");
     } catch (err) {
       console.error("Translation error:", err);
-      setError(err instanceof Error ? err.message : "Translation failed. Please check your API key.");
+      setError(err instanceof Error ? err.message : "Translation failed. Please try again.");
     } finally {
       setIsTranslating(false);
     }
