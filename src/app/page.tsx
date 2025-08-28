@@ -136,7 +136,9 @@ export default function Home() {
         {history.map((item, index) => (
           <div key={index}>
             {item[0]}
-            →
+            <span className="px-2">
+              →
+            </span>
             {item[1]}
           </div>
         ))}
