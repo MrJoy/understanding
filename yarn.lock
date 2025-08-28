@@ -3634,6 +3634,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"openai@npm:^5.16.0":
+  version: 5.16.0
+  resolution: "openai@npm:5.16.0"
+  peerDependencies:
+    ws: ^8.18.0
+    zod: ^3.23.8
+  peerDependenciesMeta:
+    ws:
+      optional: true
+    zod:
+      optional: true
+  bin:
+    openai: bin/cli
+  checksum: 10c0/4ddd3292ed9ff5991de9f12b765c977efdfe9fdb6f3f7c01eef13ef927d0300b2c6cf0c9379a36c522353a7bacf07e8bdf5ff9ab7a3e5a5f839e0b741e9a86cf
+  languageName: node
+  linkType: hard
+
 "optionator@npm:^0.9.3":
   version: 0.9.4
   resolution: "optionator@npm:0.9.4"
@@ -4780,6 +4797,7 @@ __metadata:
     eslint-config-next: "npm:15.5.2"
     flag-icons: "npm:^7.5.0"
     next: "npm:15.5.2"
+    openai: "npm:^5.16.0"
     react: "npm:19.1.1"
     react-dom: "npm:19.1.1"
     tailwindcss: "npm:^4.1.12"

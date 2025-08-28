@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import OpenAI from "openai";
 
 import { Button } from "@/components/button";
 
@@ -17,10 +18,19 @@ const locale: Record<string, Record<string, string>> = {
   },
 }
 
+// Initialize OpenAI client - API key will be exposed in production
+// For prototype purposes only - do not use in production
+const openai = new OpenAI({
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY || "",
+  dangerouslyAllowBrowser: true // Required for client-side usage
+});
+
 export default function Home() {
   const [sourceLanguage, setSourceLanguage] = React.useState("en-US");
   const [history, setHistory] = React.useState<string[][]>([]);
   const [sourceText, setSourceText] = React.useState("");
+  const [isTranslating, setIsTranslating] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
 
   const toggleLanguage = () => {
     setSourceLanguage((prev) => (prev === "en-US" ? "ja-JP" : "en-US"));
@@ -31,11 +41,31 @@ export default function Home() {
 
   const placeholderMessage = locale[sourceLanguage].inputPlaceholder;
 
-  const translate = () => {
-    // TODO: Use ChatGPT to perform the translation.
-    const translatedText = "TODO...";
+  const translate = async () => {
+    if (!sourceText.trim()) return;
 
-    setHistory((prev) => [[sourceText, translatedText], ...prev]);
+    setIsTranslating(true);
+    setError(null);
+
+    try {
+      const targetLanguage = sourceLanguage === "en-US" ? "Japanese" : "English";
+      const prompt = `Translate the following text to ${targetLanguage}. Only provide the translation without any explanation or additional text:\n\n${sourceText}`;
+
+      const completion = await openai.chat.completions.create({
+        messages: [{ role: "user", content: prompt }],
+        model: "gpt-3.5-turbo",
+        temperature: 0.3,
+        max_tokens: 1000,
+      });
+
+      const translatedText = completion.choices[0]?.message?.content?.trim() || "Translation failed";
+      setHistory((prev) => [[sourceText, translatedText], ...prev]);
+    } catch (err) {
+      console.error("Translation error:", err);
+      setError(err instanceof Error ? err.message : "Translation failed. Please check your API key.");
+    } finally {
+      setIsTranslating(false);
+    }
   };
 
   const resetHistory = () => {
@@ -54,8 +84,12 @@ export default function Home() {
           {sourceLanguage === "en-US" ? Jp : Us}
         </Button>
 
-        <Button className="flex-8 basis-8 text-nowrap" onClick={translate}>
-          {locale[sourceLanguage].translateButton}
+        <Button
+          className="flex-8 basis-8 text-nowrap"
+          onClick={translate}
+          disabled={isTranslating || !sourceText.trim()}
+        >
+          {isTranslating ? "Translating..." : locale[sourceLanguage].translateButton}
         </Button>
 
         <span className="flex-4 basis-4" />
@@ -75,16 +109,27 @@ export default function Home() {
           rows={5}
           className="flex-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none rounded-lg w-full"
           lang={sourceLanguage}
+          disabled={isTranslating}
         />
-        {history.length > 0 ? (
-          <div className="flex-1 text-base text-gray-900">
-            {history[0][1]}
-          </div>
-        ) : (
-          <div className="flex-1 text-base text-gray-400">
-            {locale[sourceLanguage].outputPlaceholder}
-          </div>
-        )}
+        <div className="flex-1">
+          {error ? (
+            <div className="text-red-500 text-base">
+              Error: {error}
+            </div>
+          ) : isTranslating ? (
+            <div className="text-gray-500 text-base">
+              Translating...
+            </div>
+          ) : history.length > 0 ? (
+            <div className="text-base text-gray-900">
+              {history[0][1]}
+            </div>
+          ) : (
+            <div className="text-base text-gray-400">
+              {locale[sourceLanguage].outputPlaceholder}
+            </div>
+          )}
+        </div>
       </main>
 
       <footer className="row-start-3 w-full !max-h-[200px] overflow-scroll">
