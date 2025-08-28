@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
 
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt }],
-      model: "gpt-3.5-turbo",
+      model: "gpt-4-turbo-2024-04-09",
       temperature: 0.3,
       max_tokens: 1000,
     });
