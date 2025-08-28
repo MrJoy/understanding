@@ -32,6 +32,8 @@ export default function Home() {
 
   const toggleLanguage = () => {
     setSourceLanguage((prev) => (prev === "en-US" ? "ja-JP" : "en-US"));
+    setSourceText("");
+    setDestText(undefined);
   }
 
   const controlSize = "text-lg";
@@ -75,7 +77,6 @@ export default function Home() {
       }
 
       setHistory((prev) => [[sourceText, translatedText], ...prev]);
-      toggleLanguage();
       setSourceText("");
       setDestText(translatedText);
       inputRef.current?.focus();
