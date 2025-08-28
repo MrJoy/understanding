@@ -104,22 +104,22 @@ export default function Home() {
           onChange={(e) => setSourceText(e.target.value)}
           placeholder={placeholderMessage}
           rows={5}
-          className="flex-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none rounded-lg w-full h-full"
+          className="flex-1 text-[16pt] text-gray-900 placeholder:text-gray-400 focus:outline-none rounded-lg w-full h-full"
           lang={sourceLanguage}
           disabled={isTranslating}
         />
         {error ? (
-          <div className="flex-1 h-full text-red-500 text-base">
+          <div className="flex-1 h-full text-red-500 text-[16pt]">
             Error: {error}
           </div>
         ) : isTranslating ? (
-          <div className="flex-1 h-full text-gray-500 text-base">
+          <div className="flex-1 h-full text-gray-500 text-[16pt]">
             Translating...
           </div>
         ) : destText ? (
-          <textarea value={destText} readOnly className="flex-1 text-base text-gray-900 w-full h-full resize-none bg-transparent ring-0 focus:ring-0 active:ring-0 border-none focus:border-none outline-none focus:outline-none" />
+          <textarea value={destText} readOnly className="flex-1 text-[16pt] text-gray-900 w-full h-full resize-none bg-transparent ring-0 focus:ring-0 active:ring-0 border-none focus:border-none outline-none focus:outline-none" />
         ) : (
-          <div className="flex-1 h-full text-base text-gray-400">
+          <div className="flex-1 h-full text-[16pt] text-gray-400">
             {locale[sourceLanguage].outputPlaceholder}
           </div>
         )}
