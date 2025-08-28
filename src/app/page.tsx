@@ -106,25 +106,21 @@ export default function Home() {
           lang={sourceLanguage}
           disabled={isTranslating}
         />
-        <div className="flex-1 h-full pt-1.5">
-          {error ? (
-            <div className="text-red-500 text-base">
-              Error: {error}
-            </div>
-          ) : isTranslating ? (
-            <div className="text-gray-500 text-base">
-              Translating...
-            </div>
-          ) : destText ? (
-            <div className="text-base text-gray-900">
-              {destText}
-            </div>
-          ) : (
-            <div className="text-base text-gray-400">
-              {locale[sourceLanguage].outputPlaceholder}
-            </div>
-          )}
-        </div>
+        {error ? (
+          <div className="flex-1 h-full text-red-500 text-base">
+            Error: {error}
+          </div>
+        ) : isTranslating ? (
+          <div className="flex-1 h-full text-gray-500 text-base">
+            Translating...
+          </div>
+        ) : destText ? (
+          <textarea value={destText} readOnly className="flex-1 text-base text-gray-900 w-full h-full resize-none bg-transparent ring-0 focus:ring-0 active:ring-0 border-none focus:border-none outline-none focus:outline-none" />
+        ) : (
+          <div className="flex-1 h-full text-base text-gray-400">
+            {locale[sourceLanguage].outputPlaceholder}
+          </div>
+        )}
       </header>
 
       <main className="row-start-2 w-full flex md:gap-4 gap-2 justify-items-stretch">
