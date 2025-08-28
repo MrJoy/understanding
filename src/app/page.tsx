@@ -34,8 +34,10 @@ export default function Home() {
     setSourceLanguage((prev) => (prev === "en-US" ? "ja-JP" : "en-US"));
   }
 
-  const Us = <span className="flex-1 text-2xl">🇺🇸</span>;
-  const Jp = <span className="flex-1 text-2xl">🇯🇵</span>;
+  const controlSize = "text-lg";
+
+  const Us = <span className={controlSize}>🇺🇸</span>;
+  const Jp = <span className={controlSize}>🇯🇵</span>;
 
   const placeholderMessage = locale[sourceLanguage].inputPlaceholder;
 
@@ -127,14 +129,14 @@ export default function Home() {
       <main className="row-start-2 w-full flex gap-4 justify-items-stretch">
         <Button className="flex-4 basis-4 text-nowrap px-4" onClick={toggleLanguage}>
           {sourceLanguage === "en-US" ? Us : Jp}
-          <span className="px-4 text-2xl">
+          <span className={`px-4 ${controlSize}`}>
             →
           </span>
           {sourceLanguage === "en-US" ? Jp : Us}
         </Button>
 
         <Button
-          className="flex-8 basis-8 text-nowrap"
+          className={`flex-8 basis-8 text-nowrap ${controlSize}`}
           onClick={translate}
           disabled={isTranslating || !sourceText.trim()}
         >
@@ -143,7 +145,7 @@ export default function Home() {
 
         <span className="flex-4 basis-4" />
 
-        <Button className="flex-1 min-w-6 max-w-6" onClick={clearInputOutput}>
+        <Button className={`flex-1 min-w-6 max-w-6 ${controlSize}`} onClick={clearInputOutput}>
           <span className="block">
             X
           </span>
