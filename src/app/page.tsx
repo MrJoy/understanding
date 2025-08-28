@@ -25,6 +25,7 @@ export default function Home() {
   const [sourceLanguage, setSourceLanguage] = React.useState("en-US");
   const [history, setHistory] = React.useState<string[][]>([]);
   const [sourceText, setSourceText] = React.useState("");
+  const [destText, setDestText] = React.useState(undefined);
   const [isTranslating, setIsTranslating] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -73,17 +74,18 @@ export default function Home() {
       setHistory((prev) => [[sourceText, translatedText], ...prev]);
       toggleLanguage();
       setSourceText("");
+      setDestText(translatedText);
     } catch (err) {
       console.error("Translation error:", err);
-      setError(err instanceof Error ? err.message : "Translation failed. Please try again.");
+      setError(err instanceof Error ? `Error: ${err.message}` : "Translation failed. Please try again.");
     } finally {
       setIsTranslating(false);
     }
   };
 
-  const resetHistory = () => {
-    setHistory([]);
+  const clearInputOutput = () => {
     setSourceText("");
+    setDestText(undefined);
   };
 
   return (
@@ -107,9 +109,9 @@ export default function Home() {
             <div className="text-gray-500 text-base">
               Translating...
             </div>
-          ) : history.length > 0 ? (
+          ) : destText ? (
             <div className="text-base text-gray-900">
-              {history[0][1]}
+              {destText}
             </div>
           ) : (
             <div className="text-base text-gray-400">
@@ -138,7 +140,7 @@ export default function Home() {
 
         <span className="flex-4 basis-4" />
 
-        <Button className="flex-1 min-w-6 max-w-6" onClick={resetHistory}>
+        <Button className="flex-1 min-w-6 max-w-6" onClick={clearInputOutput}>
           <span className="block">
             X
           </span>
