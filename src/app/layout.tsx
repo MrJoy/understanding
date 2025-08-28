@@ -13,6 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="user-scalable" content="no" />
+      </head>
       <body
         className="antialiased"
       >
