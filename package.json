@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint:js": "eslint --report-unused-disable-directives",
+    "lint:audit": "yarn npm audit --exclude angular --exclude eslint --exclude bootstrap-sass",
+    "lint:unused": "unimported",
+    "lint": "yarn tsc && yarn lint:js && yarn lint:unused && yarn lint:audit"
   },
   "dependencies": {
     "next": "15.5.2",
@@ -22,7 +25,8 @@
     "eslint": "^9.34.0",
     "eslint-config-next": "15.5.2",
     "tailwindcss": "^4.1.12",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "unimported": "^1.31.1"
   },
   "packageManager": "yarn@4.9.4"
 }
