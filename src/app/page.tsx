@@ -126,7 +126,11 @@ export default function Home() {
       </header>
 
       <main className="row-start-2 w-full flex md:gap-4 gap-2 justify-items-stretch">
-        <Button className="flex-4 basis-4 text-nowrap px-4" onClick={toggleLanguage}>
+        <Button
+          className="flex-4 basis-4 text-nowrap px-4"
+          onClick={toggleLanguage}
+          disabled={isTranslating}
+        >
           {sourceLanguage === "en-US" ? Us : Jp}
           <span className={`px-4 ${controlSize}`}>
             →
@@ -135,7 +139,7 @@ export default function Home() {
         </Button>
 
         <Button
-          className={`flex-8 basis-8 text-nowrap ${controlSize}`}
+          className={`flex-8 basis-8 disabled:border-gray-400 text-nowrap ${controlSize}`}
           onClick={translate}
           disabled={isTranslating || !sourceText.trim()}
         >
@@ -144,7 +148,11 @@ export default function Home() {
 
         <span className="flex-4 basis-4" />
 
-        <Button className={`flex-1 min-w-6 max-w-6 ${controlSize}`} onClick={clearInputOutput}>
+        <Button
+          className={`flex-1 min-w-6 max-w-6 ${controlSize}`}
+          onClick={clearInputOutput}
+          disabled={isTranslating}
+        >
           <span className="block">
             X
           </span>
