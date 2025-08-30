@@ -55,6 +55,8 @@ export default function Home() {
   const translate = async () => {
     if (!sourceText.trim()) return;
 
+    inputRef.current?.blur();
+
     setIsTranslating(true);
     setError(null);
 
