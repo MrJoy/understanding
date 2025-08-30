@@ -20,6 +20,12 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Real World Usage
+
+Deply to Vercel.  Open in Safari on your phone, and install to home screen.  Voila!  You're done!
+
+I suggest installing the Japanese IME on your phone, so you can switch to something locals will be familiar with when having them use your phone to respond.
+
 ## Keeping API Usage Down During Development
 
 In your `.env.local` file, add the following:
