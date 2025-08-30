@@ -13,12 +13,14 @@ const locale: Record<string, Record<string, string>> = {
     outputPlaceholder: "Translated text will appear here",
     translateButton: "Translate",
     flag: "🇺🇸",
+    name: "English",
   },
   "ja-JP": {
     inputPlaceholder: "日本語で何かを入力してください...",
     outputPlaceholder: "翻訳されたテキストがここに表示されます",
     translateButton: "翻訳しろ",
     flag: "🇯🇵",
+    name: "Japanese",
   },
 }
 
@@ -71,7 +73,7 @@ export default function Home() {
     setError(null);
 
     try {
-      const targetLanguage = sourceLanguage === "en-US" ? "Japanese" : "English";
+      const targetLanguage = locale[destLanguage].name;
 
       const response = await fetch("/api/translate", {
         method: "POST",
