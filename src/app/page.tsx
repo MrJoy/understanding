@@ -116,7 +116,7 @@ export default function Home() {
 
   /* grid-rows-[auto_40px_200px] */
   return (
-    <div className="font-sans grid grid-rows-[30px_auto_40px] min-h-screen max-h-screen min-w-full gap-4 px-2 py-2">
+    <div className="font-sans grid grid-rows-[30px_auto_40px] min-h-screen max-h-screen min-w-full gap-4 px-2 py-2 pb-3">
       <header className="row-start-1 w-full flex items-end-safe">
         <div className="flex-4 shrink-0">
           <b>Understanding</b> v0.0.4
