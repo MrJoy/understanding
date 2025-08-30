@@ -93,8 +93,13 @@ export default function Home() {
 
   /* grid-rows-[auto_40px_200px] */
   return (
-    <div className="font-sans grid grid-rows-[auto_40px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
-      <header className="row-start-1 w-full flex flex-row items-center gap-x-4">
+    <div className="font-sans grid grid-rows-[20px_auto_40px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
+      <header className="row-start-1 w-full">
+        <span>
+          <b>Understanding</b> v0.0.2
+        </span>
+      </header>
+      <main className="row-start-2 w-full flex flex-row items-center gap-x-4">
         <textarea
           ref={inputRef}
           value={sourceText}
@@ -120,9 +125,9 @@ export default function Home() {
             {locale[sourceLanguage].outputPlaceholder}
           </div>
         )}
-      </header>
+      </main>
 
-      <main className="row-start-2 w-full flex md:gap-4 gap-2 justify-items-stretch">
+      <main className="row-start-3 w-full flex md:gap-4 gap-2 justify-items-stretch">
         <Button
           className="flex-4 basis-4 text-nowrap px-4"
           onClick={toggleLanguage}
@@ -157,7 +162,7 @@ export default function Home() {
       </main>
 
       {/*
-      <footer className="row-start-3 w-full !max-h-[200px] overflow-scroll">
+      <footer className="row-start-4 w-full !max-h-[200px] overflow-scroll">
         {history.map((item, index) => (
           <div key={index}>
             {item[0]}
