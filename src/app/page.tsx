@@ -1,26 +1,36 @@
 "use client";
 
 import React from "react";
+import { RiEraserFill } from "@remixicon/react";
 
-import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose } from "@/components/vendor/drawer";
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/components/vendor/drawer";
 import { Button } from "@/components/vendor/button";
+import { ScrollArea } from "@/components/vendor/scroll-area";
+import { Textarea } from "@/components/vendor/textarea";
 
 const locale: Record<string, Record<string, string>> = {
   "en-US": {
     inputPlaceholder: "Type something in English...",
     outputPlaceholder: "Translated text will appear here",
     translateButton: "Translate",
+    flag: "🇺🇸",
   },
   "ja-JP": {
     inputPlaceholder: "日本語で何かを入力してください...",
     outputPlaceholder: "翻訳されたテキストがここに表示されます",
     translateButton: "翻訳しろ",
+    flag: "🇯🇵",
   },
+}
+
+function swapLanguage(language: string): string {
+  return language === "en-US" ? "ja-JP" : "en-US";
 }
 
 export default function Home() {
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const [sourceLanguage, setSourceLanguage] = React.useState("en-US");
+  const destLanguage = swapLanguage(sourceLanguage);
   const [history, setHistory] = React.useState<string[][]>([]);
   const [sourceText, setSourceText] = React.useState("");
   // const [destText, setDestText] = React.useState("Tailwind プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。");
@@ -29,7 +39,7 @@ export default function Home() {
   const [error, setError] = React.useState<string | null>(null);
 
   const toggleLanguage = () => {
-    setSourceLanguage((prev) => (prev === "en-US" ? "ja-JP" : "en-US"));
+    setSourceLanguage(swapLanguage);
     setSourceText("");
     setDestText(undefined);
     inputRef.current?.focus();
@@ -37,8 +47,8 @@ export default function Home() {
 
   const controlSize = "text-md";
 
-  const Us = <span className={controlSize}>🇺🇸</span>;
-  const Jp = <span className={controlSize}>🇯🇵</span>;
+  const SourceFlag = <span className={controlSize}>{locale[sourceLanguage].flag}</span>;
+  const DestFlag = <span className={controlSize}>{locale[destLanguage].flag}</span>;
 
   const placeholderMessage = locale[sourceLanguage].inputPlaceholder;
 
@@ -96,38 +106,39 @@ export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_auto_40px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
       <header className="row-start-1 w-full flex items-stretch">
-        <span className="flex-1">
+        <div className="flex-4 shrink-0">
           <b>Understanding</b> v0.0.2
-        </span>
+        </div>
 
-        <Drawer className="flex-1">
-          <DrawerTrigger>History</DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>Translation History</DrawerTitle>
-              <DrawerDescription>
-                Past translations you&apos;ve made will appear here.
-              </DrawerDescription>
-            </DrawerHeader>
-            {history.map((item, index) => (
-              <div key={index}>
-                {item[0]}
-                <span className="px-2">
-                  →
-                </span>
-                {item[1]}
-              </div>
-            ))}
-            <DrawerFooter>
-              <DrawerClose>
-                <Button variant="ghost">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
+        <div className="flex-2" />
+
+        <div className="flex-1 shrink-1">
+          <Drawer>
+            <DrawerTrigger>History</DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>Translation History</DrawerTitle>
+                <DrawerDescription>
+                  Past translations you&apos;ve made will appear here.
+                </DrawerDescription>
+              </DrawerHeader>
+              <ScrollArea>
+                {history.map((item, index) => (
+                  <div key={index}>
+                    {item[0]}
+                    <span className="px-2">
+                      →
+                    </span>
+                    {item[1]}
+                  </div>
+                ))}
+              </ScrollArea>
+            </DrawerContent>
+          </Drawer>
+        </div>
       </header>
       <main className="row-start-2 w-full flex flex-row items-center gap-x-4">
-        <textarea
+        <Textarea
           ref={inputRef}
           value={sourceText}
           onChange={(e) => setSourceText(e.target.value)}
@@ -159,13 +170,16 @@ export default function Home() {
           className="flex-4 basis-4 text-nowrap px-4"
           onClick={toggleLanguage}
           disabled={isTranslating}
+          variant="secondary"
         >
-          {sourceLanguage === "en-US" ? Us : Jp}
+          {SourceFlag}
           <span className={`px-4 ${controlSize}`}>
             →
           </span>
-          {sourceLanguage === "en-US" ? Jp : Us}
+          {DestFlag}
         </Button>
+
+        <span className="flex-2 basis-2" />
 
         <Button
           className={`flex-8 basis-8 disabled:border-gray-400 text-nowrap ${controlSize}`}
@@ -178,13 +192,12 @@ export default function Home() {
         <span className="flex-4 basis-4" />
 
         <Button
-          className={`flex-1 min-w-6 max-w-6 ${controlSize}`}
+          className={`flex-1 min-w-6.5 max-w-6.5 ${controlSize}`}
           onClick={clearInputOutput}
           disabled={isTranslating}
+          variant="destructive"
         >
-          <span className="block">
-            X
-          </span>
+          <RiEraserFill />
         </Button>
       </main>
     </div>
