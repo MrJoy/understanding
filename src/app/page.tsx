@@ -50,7 +50,8 @@ export default function Home() {
   const toggleLanguage = () => {
     setSourceLanguage(swapLanguage);
     setSourceText("");
-    setDestText(undefined);
+    // Leave the last destText so the respondant can see it.
+    // setDestText(undefined);
     inputRef.current?.focus();
   }
 
