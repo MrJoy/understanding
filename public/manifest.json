@@ -1,0 +1,18 @@
+{
+  "name": "Understanding",
+  "short_name": "Understanding",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "mrjoy_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "mrjoy_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}
