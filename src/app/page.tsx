@@ -136,7 +136,7 @@ export default function Home() {
               </DrawerHeader>
               <div className="mx-4 mb-4 min-h-[1fr] max-h-[1fr] overflow-scroll">
                 {history.map((item, index) => (
-                  <div key={index}>
+                  <div key={index} className="mb-2">
                     {item[0]}
                     <span className="px-2">
                       →
