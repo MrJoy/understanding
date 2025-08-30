@@ -119,7 +119,7 @@ export default function Home() {
     <div className="font-sans grid grid-rows-[30px_auto_40px] min-h-screen max-h-screen min-w-full gap-4 px-2 py-2 pb-3">
       <header className="row-start-1 w-full flex items-end-safe">
         <div className="flex-4 shrink-0">
-          <b>Understanding</b> v0.0.4
+          <b>Understanding</b> v0.0.5
         </div>
 
         <div className="flex-2" />
