@@ -71,32 +71,26 @@ export default function Home() {
     setError(null);
 
     try {
-      let translatedText;
-      if (process.env.NEXT_PUBLIC_SKIP_TRANSLATION) {
-        translatedText = "[Translation API is currently disabled]";
-        // translatedText = "Tailwind プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。";
-      } else {
-        const targetLanguage = sourceLanguage === "en-US" ? "Japanese" : "English";
+      const targetLanguage = sourceLanguage === "en-US" ? "Japanese" : "English";
 
-        const response = await fetch("/api/translate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            text: sourceText,
-            targetLanguage,
-          }),
-        });
+      const response = await fetch("/api/translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: sourceText,
+          targetLanguage,
+        }),
+      });
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (!response.ok) {
-          throw new Error(data.error || "Translation failed");
-        }
-
-        translatedText = data.translation;
+      if (!response.ok) {
+        throw new Error(data.error || "Translation failed");
       }
+
+      const translatedText = data.translation;
 
       setHistory((prev) => [[sourceText, translatedText], ...prev]);
       setSourceText("");

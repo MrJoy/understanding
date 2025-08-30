@@ -16,6 +16,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (process.env.NEXT_PUBLIC_SKIP_TRANSLATION) {
+      // For something very very long, to test scrolling of the output area:
+      // "Tailwind プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。";
+      return NextResponse.json({ translation: `[${targetLanguage}] ${text}` });
+    }
+
     const prompt = `Translate the following text to ${targetLanguage}.  The text might consist of a single word, phrase, or number.  Only provide the translation without any explanation or additional text:\n\n${text}`;
 
     const completion = await openai.chat.completions.create({
