@@ -115,17 +115,17 @@ export default function Home() {
 
   /* grid-rows-[auto_40px_200px] */
   return (
-    <div className="font-sans grid grid-rows-[20px_auto_40px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
+    <div className="font-sans grid grid-rows-[30px_auto_40px] min-h-screen max-h-screen min-w-full gap-4 px-2 py-2">
       <header className="row-start-1 w-full flex items-end-safe">
         <div className="flex-4 shrink-0">
-          <b>Understanding</b> v0.0.2
+          <b>Understanding</b> v0.0.3
         </div>
 
         <div className="flex-2" />
 
-        <div className="flex-1 shrink-1">
+        <div className="flex-0 shrink-1 align-middle">
           <Drawer>
-            <DrawerTrigger><RiChatHistoryFill /></DrawerTrigger>
+            <DrawerTrigger className="block"><RiChatHistoryFill /></DrawerTrigger>
             <DrawerContent className="min-h-[30%] max-h-[80%]">
               <DrawerHeader>
                 <DrawerTitle>Translation History</DrawerTitle>
