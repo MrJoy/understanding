@@ -1,4 +1,4 @@
-import { cx } from "class-variance-authority";
+import { cx } from "@/lib/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
