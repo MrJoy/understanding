@@ -2,16 +2,18 @@
 
 ## History
 
-* Require confirmation before resetting history.
-  * ~~Button to just clear the input/output but leaving history alone?~~
-* ~~Better formatting of history.~~
 * "New conversation", and a history of conversations.
+* Store history in LocalStorage.
+* Mechanism for clearing history.
+* Timestamp history entries.
+* Better formatting for history display.
 
 ## UX
 
 * Animated spinner when translating.
-* Quick help popup in target language?
-* When input has focus, hide output, with a way to get it back.
+* Quick help popup in source language?
+* When input has focus, hide output, with a way to get it back?
+* Kill the fucking auto-zoom!!!
 
 ## Administration / Product Feedback
 
