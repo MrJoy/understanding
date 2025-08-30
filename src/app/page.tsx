@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { RiEraserFill } from "@remixicon/react";
+import { RiEraserFill, RiChatHistoryFill } from "@remixicon/react";
 
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/components/vendor/drawer";
 import { Button } from "@/components/vendor/button";
@@ -105,7 +105,7 @@ export default function Home() {
   /* grid-rows-[auto_40px_200px] */
   return (
     <div className="font-sans grid grid-rows-[20px_auto_40px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
-      <header className="row-start-1 w-full flex items-stretch">
+      <header className="row-start-1 w-full flex items-end-safe">
         <div className="flex-4 shrink-0">
           <b>Understanding</b> v0.0.2
         </div>
@@ -114,7 +114,7 @@ export default function Home() {
 
         <div className="flex-1 shrink-1">
           <Drawer>
-            <DrawerTrigger>History</DrawerTrigger>
+            <DrawerTrigger><RiChatHistoryFill /></DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
                 <DrawerTitle>Translation History</DrawerTitle>
@@ -157,9 +157,9 @@ export default function Home() {
             Translating...
           </div>
         ) : destText ? (
-          <textarea value={destText} readOnly className="flex-1 text-[18pt] text-gray-900 w-full h-full resize-none bg-transparent ring-0 focus:ring-0 active:ring-0 border-none focus:border-none outline-none focus:outline-none" />
+          <Textarea value={destText} readOnly className="flex-1 text-[18pt] text-gray-900 w-full h-full resize-none bg-transparent ring-0 focus:ring-0 active:ring-0 border-none focus:border-none outline-none focus:outline-none" />
         ) : (
-          <div className="flex-1 h-full text-[18pt] text-gray-400">
+          <div className="flex-1 h-full text-[18pt] text-gray-400 pt-1.5 leading-[24px]">
             {locale[sourceLanguage].outputPlaceholder}
           </div>
         )}
@@ -192,12 +192,14 @@ export default function Home() {
         <span className="flex-4 basis-4" />
 
         <Button
-          className={`flex-1 min-w-6.5 max-w-6.5 ${controlSize}`}
+          className={`flex-2 basis-2 min-w-8 max-w-8 ${controlSize}`}
           onClick={clearInputOutput}
           disabled={isTranslating}
           variant="destructive"
         >
-          <RiEraserFill />
+          <span className="block">
+            <RiEraserFill />
+          </span>
         </Button>
       </main>
     </div>
