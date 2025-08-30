@@ -2,7 +2,8 @@
 
 import React from "react";
 
-import { Button } from "@/components/button";
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose } from "@/components/vendor/drawer";
+import { Button } from "@/components/vendor/button";
 
 const locale: Record<string, Record<string, string>> = {
   "en-US": {
@@ -94,10 +95,36 @@ export default function Home() {
   /* grid-rows-[auto_40px_200px] */
   return (
     <div className="font-sans grid grid-rows-[20px_auto_40px] min-h-screen max-h-screen min-w-full p-2 pb-20 gap-4 sm:p-1">
-      <header className="row-start-1 w-full">
-        <span>
+      <header className="row-start-1 w-full flex items-stretch">
+        <span className="flex-1">
           <b>Understanding</b> v0.0.2
         </span>
+
+        <Drawer className="flex-1">
+          <DrawerTrigger>History</DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Translation History</DrawerTitle>
+              <DrawerDescription>
+                Past translations you&apos;ve made will appear here.
+              </DrawerDescription>
+            </DrawerHeader>
+            {history.map((item, index) => (
+              <div key={index}>
+                {item[0]}
+                <span className="px-2">
+                  →
+                </span>
+                {item[1]}
+              </div>
+            ))}
+            <DrawerFooter>
+              <DrawerClose>
+                <Button variant="ghost">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
       </header>
       <main className="row-start-2 w-full flex flex-row items-center gap-x-4">
         <textarea
@@ -160,20 +187,6 @@ export default function Home() {
           </span>
         </Button>
       </main>
-
-      {/*
-      <footer className="row-start-4 w-full !max-h-[200px] overflow-scroll">
-        {history.map((item, index) => (
-          <div key={index}>
-            {item[0]}
-            <span className="px-2">
-              →
-            </span>
-            {item[1]}
-          </div>
-        ))}
-      </footer>
-      */}
     </div>
   );
 }
