@@ -20,3 +20,7 @@
 * Log translation activity and errors somewhere...
 * Access controls!
 * Let user flag translations as good/bad.
+
+## Issues
+
+* Rendering on Safari mobile seems to assume a viewport that includes the address bar area, causing the page to render too long.
