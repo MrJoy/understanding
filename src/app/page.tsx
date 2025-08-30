@@ -5,7 +5,6 @@ import { RiEraserFill, RiChatHistoryFill } from "@remixicon/react";
 
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/components/vendor/drawer";
 import { Button } from "@/components/vendor/button";
-import { ScrollArea } from "@/components/vendor/scroll-area";
 import { Textarea } from "@/components/vendor/textarea";
 
 const locale: Record<string, Record<string, string>> = {
@@ -31,7 +30,17 @@ export default function Home() {
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const [sourceLanguage, setSourceLanguage] = React.useState("en-US");
   const destLanguage = swapLanguage(sourceLanguage);
-  const [history, setHistory] = React.useState<string[][]>([]);
+  const [history, setHistory] = React.useState<string[][]>([
+    // ["Hello, world!", "こんにちは、世界！"],
+    // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
+    // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
+    // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
+    // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
+    // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
+    // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
+    // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
+    // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
+  ]);
   const [sourceText, setSourceText] = React.useState("");
   // const [destText, setDestText] = React.useState("Tailwind プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。");
   const [destText, setDestText] = React.useState(undefined);
@@ -117,14 +126,14 @@ export default function Home() {
         <div className="flex-1 shrink-1">
           <Drawer>
             <DrawerTrigger><RiChatHistoryFill /></DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent className="min-h-[30%] max-h-[80%]">
               <DrawerHeader>
                 <DrawerTitle>Translation History</DrawerTitle>
                 <DrawerDescription>
                   Past translations you&apos;ve made will appear here.
                 </DrawerDescription>
               </DrawerHeader>
-              <ScrollArea>
+              <div className="mx-4 mb-4 min-h-[1fr] max-h-[1fr] overflow-scroll">
                 {history.map((item, index) => (
                   <div key={index}>
                     {item[0]}
@@ -134,7 +143,7 @@ export default function Home() {
                     {item[1]}
                   </div>
                 ))}
-              </ScrollArea>
+              </div>
             </DrawerContent>
           </Drawer>
         </div>
