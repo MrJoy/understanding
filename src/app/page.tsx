@@ -3,26 +3,10 @@
 import React from "react";
 import { RiEraserFill, RiChatHistoryFill } from "@remixicon/react";
 
+import { locale } from "@/data/locale";
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/components/vendor/drawer";
 import { Button } from "@/components/vendor/button";
 import { Textarea } from "@/components/vendor/textarea";
-
-const locale: Record<string, Record<string, string>> = {
-  "en-US": {
-    inputPlaceholder: "Type something in English...",
-    outputPlaceholder: "Translated text will appear here",
-    translateButton: "Translate",
-    flag: "🇺🇸",
-    name: "English",
-  },
-  "ja-JP": {
-    inputPlaceholder: "日本語で何かを入力してください...",
-    outputPlaceholder: "翻訳されたテキストがここに表示されます",
-    translateButton: "翻訳しろ",
-    flag: "🇯🇵",
-    name: "Japanese",
-  },
-}
 
 function swapLanguage(language: string): string {
   return language === "en-US" ? "ja-JP" : "en-US";
