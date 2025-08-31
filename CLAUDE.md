@@ -136,3 +136,10 @@ EOF
 )"
 ```
 **Note**: Avoid `git add -A` when multiple Claudes work in parallel - add only YOUR files.
+
+### Implementation Guidelines
+
+- **Stop for Ambiguity**: When specs/requirements have multiple valid interpretations, ALWAYS ask the human for clarification before implementing
+- **Raise Design Questions**: If you identify edge cases or missing requirements during implementation, stop and ask rather than making assumptions
+- **Confirm Technical Decisions**: For significant architectural choices (database schema, API design, etc.), present options and get approval before proceeding
+- **No Unsolicited Requirements**: Never add performance metrics, benchmarks, or non-functional requirements unless explicitly requested
