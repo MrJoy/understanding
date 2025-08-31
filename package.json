@@ -7,9 +7,10 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint:js": "eslint --report-unused-disable-directives",
+    "lint:css": "stylelint --report-needless-disables --report-invalid-scope-disables --config ./stylelint.config.js ./src/app/globals.css \"./src/app/**/.css\"",
     "lint:audit": "yarn npm audit --exclude angular --exclude eslint --exclude bootstrap-sass",
     "lint:unused": "unimported",
-    "lint": "yarn tsc && yarn lint:js && yarn lint:unused && yarn lint:audit"
+    "lint": "yarn tsc && yarn lint:css && yarn lint:js && yarn lint:unused && yarn lint:audit"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
@@ -32,6 +33,8 @@
     "@types/react-dom": "^19.1.9",
     "eslint": "^9.34.0",
     "eslint-config-next": "15.5.2",
+    "stylelint": "^16.23.1",
+    "stylelint-config-standard": "^39.0.0",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2",
     "unimported": "^1.31.1"
