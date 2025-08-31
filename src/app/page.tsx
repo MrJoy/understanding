@@ -17,6 +17,8 @@ export default function Home() {
   const [sourceLanguage, setSourceLanguage] = React.useState("en-US");
   const destLanguage = swapLanguage(sourceLanguage);
   const [history, setHistory] = React.useState<string[][]>([
+    // Dummy data for testing history rendering / scrolling:
+    //
     // ["Hello, world!", "こんにちは、世界！"],
     // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
     // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
@@ -28,6 +30,7 @@ export default function Home() {
     // ["jkasdhkahs kasdjha sdjkhasdjk akjsdh akjhd akjhd kjahds kadkjh dkjha sdka dkhjas kjas has dha hsdhaks ", "プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。"],
   ]);
   const [sourceText, setSourceText] = React.useState("");
+  // Dummy data for testing output rendering:
   // const [destText, setDestText] = React.useState("Tailwind プロジェクトで独自のカスタムスタイルを追加するためのベストプラクティス。 フレームワークを使用する際の最大の課題は、フレームワークが対応していない必要なものがある場合に何をすべきかを把握することです。 Tailwindは、何を構築していてもフレームワークと戦っている感じがしないように、拡張可能でカスタマイズ可能にするために最初から設計されています。 このガイドは、デザイントークンのカスタマイズ、必要に応じてその制約から脱出する方法、独自のカスタムCSSの追加、プラグインによるフレームワークの拡張などのトピックをカバーしています。");
   const [destText, setDestText] = React.useState(undefined);
   const [isTranslating, setIsTranslating] = React.useState(false);
