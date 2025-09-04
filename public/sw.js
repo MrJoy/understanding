@@ -59,14 +59,14 @@ self.addEventListener('fetch', (event) => {
   }
 
   const url = new URL(event.request.url);
-  
+
   // Determine caching strategy based on resource type
   // For hashed assets (immutable), use cache-first
-  const isHashedAsset = url.pathname.includes('/_next/static/') || 
+  const isHashedAsset = url.pathname.includes('/_next/static/') ||
                         url.pathname.match(/\.[0-9a-f]{8,}\./);
-  
+
   // For HTML documents and API routes, use network-first
-  const isDocument = event.request.destination === 'document' || 
+  const isDocument = event.request.destination === 'document' ||
                      url.pathname === '/' ||
                      url.pathname.startsWith('/api/');
 
@@ -140,7 +140,7 @@ self.addEventListener('message', (event) => {
     console.log('[ServiceWorker] Skip waiting');
     self.skipWaiting();
   }
-  
+
   if (event.data && event.data.type === 'CHECK_UPDATE') {
     // This will be used for manual update checks
     console.log('[ServiceWorker] Checking for updates');

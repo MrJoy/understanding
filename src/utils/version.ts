@@ -18,11 +18,11 @@ export function getVersionInfo() {
 export function isNewerVersion(currentVersion: string, newVersion: string): boolean {
   const current = currentVersion.split('.').map(Number);
   const next = newVersion.split('.').map(Number);
-  
+
   for (let i = 0; i < 3; i++) {
     if (next[i] > current[i]) return true;
     if (next[i] < current[i]) return false;
   }
-  
+
   return false;
 }
