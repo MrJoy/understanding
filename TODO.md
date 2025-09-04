@@ -3,10 +3,7 @@
 ## History
 
 * "New conversation", and a history of conversations.
-* Store history in LocalStorage.
-* Mechanism for clearing history.
 * Timestamp history entries.
-* Better formatting for history display.
 
 ## UX
 
@@ -14,6 +11,7 @@
 * Quick help popup in source language?
 * When input has focus, hide output, with a way to get it back?
 * Kill the fucking auto-zoom!!!
+* Confirmation modals when performing destructive operations on history.
 
 ## Administration / Product Feedback
 
