@@ -17,26 +17,38 @@ export function useServiceWorker() {
     registration: null,
   });
 
-  const applyUpdate = useCallback(() => {
-    if (!state.registration?.waiting) {
+  const applyUpdate = useCallback(async () => {
+    console.log('[ServiceWorker] applyUpdate called');
+    console.log('[ServiceWorker] Current registration:', state.registration);
+    console.log('[ServiceWorker] Waiting worker:', state.registration?.waiting);
+    
+    // Try to get fresh registration if waiting is not set
+    let waitingWorker = state.registration?.waiting;
+    if (!waitingWorker && state.updateAvailable) {
+      console.log('[ServiceWorker] No waiting worker in state, fetching fresh registration');
+      const freshReg = await navigator.serviceWorker.getRegistration();
+      waitingWorker = freshReg?.waiting;
+      console.log('[ServiceWorker] Fresh registration waiting:', waitingWorker);
+    }
+    
+    if (!waitingWorker) {
       console.log('[ServiceWorker] No update waiting');
       return;
     }
 
     console.log('[ServiceWorker] Applying update');
-    // Tell the waiting service worker to activate
-    state.registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-
-    // Reload the page once the new service worker is active
+    
+    // Listen for controller change before sending skip waiting message
     const listener = () => {
-      if (state.registration?.active) {
-        console.log('[ServiceWorker] Update applied, reloading page');
-        window.location.reload();
-      }
+      console.log('[ServiceWorker] Controller changed, reloading page');
+      window.location.reload();
     };
-
-    state.registration.addEventListener('controllerchange', listener);
-  }, [state.registration]);
+    
+    navigator.serviceWorker.addEventListener('controllerchange', listener);
+    
+    // Tell the waiting service worker to activate
+    waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+  }, [state.registration, state.updateAvailable]);
 
   const checkForUpdate = useCallback(async () => {
     if (!state.registration) {
@@ -78,6 +90,17 @@ export function useServiceWorker() {
           registration,
         }));
 
+        // Check if there's already a waiting worker
+        if (registration.waiting && navigator.serviceWorker.controller) {
+          console.log('[ServiceWorker] Update already available');
+          console.log('[ServiceWorker] Waiting worker:', registration.waiting);
+          setState(prev => ({ 
+            ...prev, 
+            updateAvailable: true,
+            registration // Ensure registration is updated
+          }));
+        }
+
         // Listen for updates
         registration.addEventListener('updatefound', () => {
           console.log('[ServiceWorker] Update found');
@@ -88,12 +111,21 @@ export function useServiceWorker() {
             return;
           }
 
-          newWorker.addEventListener('statechange', () => {
+          newWorker.addEventListener('statechange', async () => {
             console.log('[ServiceWorker] New worker state:', newWorker.state);
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
               // New service worker is installed and ready, but not yet active
               console.log('[ServiceWorker] Update available');
-              setState(prev => ({ ...prev, updateAvailable: true }));
+              
+              // Get the latest registration to ensure we have the waiting worker
+              const currentReg = await navigator.serviceWorker.getRegistration();
+              console.log('[ServiceWorker] Current registration waiting:', currentReg?.waiting);
+              
+              setState(prev => ({ 
+                ...prev, 
+                updateAvailable: true,
+                registration: currentReg || prev.registration // Update with fresh registration
+              }));
             }
           });
         });

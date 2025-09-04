@@ -23,8 +23,8 @@ self.addEventListener('install', (event) => {
         console.error('[ServiceWorker] Cache failed:', error);
       })
   );
-  // Force the waiting service worker to become active
-  self.skipWaiting();
+  // Don't skip waiting automatically - wait for user confirmation
+  // self.skipWaiting();
 });
 
 // Activate event - clean up old caches
