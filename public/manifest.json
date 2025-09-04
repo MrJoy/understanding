@@ -3,6 +3,7 @@
   "short_name": "Understanding",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "mrjoy_512.png",
