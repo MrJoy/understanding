@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changes
 
 - Make another attempt at PWA setup
-- Disable Turbopack because Serwist doesn't support it yet
+- Disable Turbopack because Serwist [doesn't support it yet](https://github.com/serwist/serwist/issues/54)
 
 ## 0.0.9 - 2025-09-04
 
