@@ -22,11 +22,11 @@ export function useServiceWorker() {
       console.log('[ServiceWorker] No update waiting');
       return;
     }
-    
+
     console.log('[ServiceWorker] Applying update');
     // Tell the waiting service worker to activate
     state.registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-    
+
     // Reload the page once the new service worker is active
     const listener = () => {
       if (state.registration?.active) {
@@ -34,7 +34,7 @@ export function useServiceWorker() {
         window.location.reload();
       }
     };
-    
+
     state.registration.addEventListener('controllerchange', listener);
   }, [state.registration]);
 
@@ -42,7 +42,7 @@ export function useServiceWorker() {
     if (!state.registration) {
       return;
     }
-    
+
     try {
       console.log('[ServiceWorker] Manually checking for updates');
       await state.registration.update();
@@ -71,7 +71,7 @@ export function useServiceWorker() {
         console.log('[ServiceWorker] Registering...');
         const registration = await navigator.serviceWorker.register('/sw.js');
         console.log('[ServiceWorker] Registered successfully:', registration);
-        
+
         setState(prev => ({
           ...prev,
           isRegistered: true,
@@ -82,7 +82,7 @@ export function useServiceWorker() {
         registration.addEventListener('updatefound', () => {
           console.log('[ServiceWorker] Update found');
           const newWorker = registration.installing;
-          
+
           if (!newWorker) {
             return;
           }
