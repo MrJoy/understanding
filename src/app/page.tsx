@@ -3,6 +3,7 @@
 import React from "react";
 import { RiEraserFill, RiChatHistoryFill, RiDeleteBin6Line } from "@remixicon/react";
 
+import { APP_VERSION } from "@/utils/version";
 import { locale } from "@/data/locale";
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/components/vendor/drawer";
 import { Button } from "@/components/vendor/button";
@@ -95,7 +96,7 @@ export default function Home() {
     <div className="font-sans grid grid-rows-[30px_auto_40px] min-h-screen max-h-screen min-w-full gap-4 px-2 py-2 pb-3">
       <header className="row-start-1 w-full flex items-end-safe">
         <div className="flex-4 shrink-0">
-          <b>Understanding</b> v0.0.8
+          <b>Understanding</b> v{APP_VERSION}
         </div>
 
         <div className="flex-2" />
