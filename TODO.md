@@ -22,3 +22,4 @@
 ## Issues
 
 * Rendering on Safari mobile seems to assume a viewport that includes the address bar area, causing the page to render too long.
+* Need a way to keep version in sync between sw.js and version.ts
