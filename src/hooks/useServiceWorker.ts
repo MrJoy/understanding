@@ -84,10 +84,12 @@ export function useServiceWorker() {
           const newWorker = registration.installing;
 
           if (!newWorker) {
+            console.log('[ServiceWorker] No installing worker found');
             return;
           }
 
           newWorker.addEventListener('statechange', () => {
+            console.log('[ServiceWorker] New worker state:', newWorker.state);
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
               // New service worker is installed and ready, but not yet active
               console.log('[ServiceWorker] Update available');
