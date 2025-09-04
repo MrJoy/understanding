@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ServiceWorkerProvider } from "@/components/ServiceWorkerProvider";
 
 export const metadata: Metadata = {
   title: "Understanding",
@@ -27,7 +28,9 @@ export default function RootLayout({
       <body
         className="antialiased overflow-clip"
       >
-        {children}
+        <ServiceWorkerProvider>
+          {children}
+        </ServiceWorkerProvider>
       </body>
     </html>
   );
