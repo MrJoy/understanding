@@ -1,6 +1,6 @@
 // Version management utilities
 
-export const APP_VERSION = '0.0.7';
+export const APP_VERSION = '0.0.8';
 
 export function getCacheVersion(): string {
   return `understanding-v${APP_VERSION}`;

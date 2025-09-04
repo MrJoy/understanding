@@ -1,8 +1,8 @@
 // Service Worker for Understanding PWA
-// Version: 0.0.7
+// Version: 0.0.8
 // Note: This version must be manually synced with src/utils/version.ts
 
-const CACHE_NAME = 'understanding-v0.0.7';
+const CACHE_NAME = 'understanding-v0.0.8';
 // Only pre-cache non-hashed assets that won't change between builds
 const urlsToCache = [
   '/manifest.json',
