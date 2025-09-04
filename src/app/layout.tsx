@@ -14,13 +14,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <link rel="manifest" href="manifest.json" />
         <meta name="format-detection" content="telephone=no" />
         <meta
           name="viewport"
-          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable = no"
+          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
       </head>
       <body
