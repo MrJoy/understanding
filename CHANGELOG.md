@@ -5,7 +5,14 @@ All notable changes to Understanding will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.0.9 - 2025-09-4
+## 0.0.10 - 2025-09-04
+
+### Changes
+
+- Make another attempt at PWA setup
+- Disable Turbopack because Serwist doesn't support it yet
+
+## 0.0.9 - 2025-09-04
 
 ### Changes
 

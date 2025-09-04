@@ -42,3 +42,7 @@ next-env.d.ts
 
 # other tools
 .claude/settings.local.json
+
+# Serwist
+public/sw*
+public/swe-worker*
